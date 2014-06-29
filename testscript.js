@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var args = require('minimist').parse(process.argv, {
+var args = require('minimist')(process.argv, {
 	i:'input',
   o:'output'
 })
@@ -10,7 +10,7 @@ var through = require('through2')
 var streams = clistreams(resolve(args.input), resolve(args.output))
 
 // data is now a duplex that is either stdin/stdout/files
-data.input.pipe(through(function(chunk, enc, next){
+streams.input.pipe(through(function(chunk, enc, next){
 	this.push(chunk.toString().toUpperCase())
 	next()
-})).pipe(data.output)
+})).pipe(streams.output)

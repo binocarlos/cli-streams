@@ -1,37 +1,35 @@
 var path = require('path')
 var fs = require('fs')
 
-module.exports = function(filepaths){
-
-	filepaths = filepaths || {}
+module.exports = function(input, output){
 
 	var inputStream = process.stdin
 	var outputStream = process.stdout
 
-	if(filepaths.input){
-		if(typeof(filepaths.input)==='string'){
-			if(!fs.existsSync(filepaths.input)){
+	if(input){
+		if(typeof(input)==='string'){
+			if(!fs.existsSync(input)){
 		    console.error('error - file: ' + inputpath + ' does not exit')
 		    process.exit(1)
 		  }
-		  inputStream = fs.createReadStream(filepaths.input)
+		  inputStream = fs.createReadStream(input)
 		}
 		else{
-			inputStream = filepaths.input
+			inputStream = input
 		}
 	}
 
-	if(filepaths.output){
-		if(typeof(filepaths.output)==='string'){
-		  var outputfolder = path.dirname(filepaths.output)
+	if(output){
+		if(typeof(output)==='string'){
+		  var outputfolder = path.dirname(output)
 		  if(!fs.existsSync(outputfolder)){
 		    console.error('error - folder: ' + outputfolder + ' does not exit')
 		    process.exit(1)
 		  }
-		  outputStream = fs.createWriteStream(filepaths.output)
+		  outputStream = fs.createWriteStream(output)
 		}
 		else{
-			outputStream = filepaths.output
+			outputStream = output
 		}
 	}
 

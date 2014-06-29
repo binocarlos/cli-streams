@@ -5,10 +5,7 @@ var cp = require('child_process')
 
 tape('test a filepipe', function(t){
 
-	var streams = clistreams({
-		input:__dirname + '/package.json',
-		output:__dirname + '/package.out.json'
-	})
+	var streams = clistreams(__dirname + '/package.json', __dirname + '/package.out.json')
 
 	streams.output.on('close', function(){
 		var packageorig = require(__dirname + '/package.json')
@@ -26,7 +23,9 @@ tape('test a filepipe', function(t){
 tape('test a stdin / stdout pipe', function(t){
 
 	var proc = cp.spawn('node', [
-		__dirname + '/testscript.js --output testout.txt'
+		__dirname + '/testscript.js',
+		'--output',
+		'testout.txt'
 	], {
 		stdio:'pipe'
 	})
@@ -37,5 +36,7 @@ tape('test a stdin / stdout pipe', function(t){
 		t.end()
 	})
 
+	proc.stderr.pipe(process.stderr)
+	proc.stdout.pipe(process.stdout)
 	proc.stdin.end('hello world')
 })
