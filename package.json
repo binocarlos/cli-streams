@@ -1,0 +1,26 @@
+{
+  "name": "cli-streams",
+  "version": "0.0.0",
+  "description": "A duplex stream of process.stdin/stdout or filestreams depending on cli options",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binocarlos/cli-streams.git"
+  },
+  "keywords": [
+    "cli",
+    "streams",
+    "input",
+    "output",
+    "duplex"
+  ],
+  "author": "Kai Davenport",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/binocarlos/cli-streams/issues"
+  },
+  "homepage": "https://github.com/binocarlos/cli-streams"
+}
