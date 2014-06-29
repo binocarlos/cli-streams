@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/binocarlos/cli-streams/issues"
   },
-  "homepage": "https://github.com/binocarlos/cli-streams"
+  "homepage": "https://github.com/binocarlos/cli-streams",
+  "dependencies": {
+    "duplexer2": "0.0.2",
+    "duplexer": "^0.1.1"
+  },
+  "devDependencies": {
+    "tape": "^2.13.3"
+  }
 }
