@@ -4,13 +4,13 @@ var args = require('minimist').parse(process.argv, {
   o:'output'
 })
 var resolve = require('cli-path-resolve')
-var streams = require('./')
+var clistreams = require('./')
 var through = require('through2')
 
-var data = streams(resolve(args.input), resolve(args.output))
+var streams = clistreams(resolve(args.input), resolve(args.output))
 
 // data is now a duplex that is either stdin/stdout/files
-data.pipe(through(function(chunk, enc, next){
+data.input.pipe(through(function(chunk, enc, next){
 	this.push(chunk.toString().toUpperCase())
 	next()
-})).pipe(data)
+})).pipe(data.output)

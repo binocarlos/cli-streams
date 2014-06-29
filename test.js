@@ -1,6 +1,7 @@
 var tape = require('tape')
 var clistreams = require('./')
 var fs = require('fs')
+var cp = require('child_process')
 
 tape('test a filepipe', function(t){
 
@@ -19,4 +20,22 @@ tape('test a filepipe', function(t){
 	})
 
 	streams.input.pipe(streams.output)
+})
+
+
+tape('test a stdin / stdout pipe', function(t){
+
+	var proc = cp.spawn('node', [
+		__dirname + '/testscript.js --output testout.txt'
+	], {
+		stdio:'pipe'
+	})
+
+	proc.on('close', function(){
+		var contents = fs.readFileSync(__dirname + '/testout.txt', 'utf8')
+		t.equal(contents, 'HELLO WORLD', 'the text is the same')
+		t.end()
+	})
+
+	proc.stdin.end('hello world')
 })
