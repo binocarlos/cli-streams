@@ -1,6 +1,6 @@
 {
   "name": "cli-streams",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A duplex stream of process.stdin/stdout or filestreams depending on cli options",
   "main": "index.js",
   "scripts": {
