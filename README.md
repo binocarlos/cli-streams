@@ -1,7 +1,7 @@
 cli-streams
 ===========
 
-A duplex stream of process.stdin/stdout or filestreams depending on cli options
+A pair of streams - process.stdin/stdout or filestreams depending on cli option overrides
 
 ## installation
 
@@ -19,32 +19,24 @@ var args = require('minimist').parse(process.argv, {
   o:'output'
 })
 var resolve = require('cli-path-resolve')
-var streams = require('cli-streams')
+var clistreams = require('cli-streams')
 var through = require('through2')
 
-var data = streams(resolve(args.input), resolve(args.output))
+var streams = clistreams(resolve(args.input), resolve(args.output))
 
-
-// data is now a duplex that is either stdin/stdout/files
-data.pipe(through(function(chunk, enc, next){
-	this.push(chunk)
-	next()	
-}))
+streams.input.pipe(through(function(chunk, enc, next){
+	this.push(chunk.toString().toUpperCase())
+})).pipe(streams.output)
 ```
 
 ## api
 
-### `var duplex = streams(inputPath, outputPath)`
+### `var pair = streams(inputPath, outputPath)`
 
-Return a duplex stream
+return an object with 2 streams:
 
-If inputpath is not null - the file is checked to exist and will throw an error if not
-
-If it is null - the readable stream is process.stdin
-
-If outputPath is not null - the directory is checked to exist and will throw an error if not
-
-If it is null - the writable stream is process.stdout
+ * input - either process.stdin or a file readStream if input param exists
+ * output - either process.stdout or a file readStream if input param exists
 
 ### license
 
