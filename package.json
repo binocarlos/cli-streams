@@ -1,6 +1,6 @@
 {
   "name": "cli-streams",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A duplex stream of process.stdin/stdout or filestreams depending on cli options",
   "main": "index.js",
   "scripts": {
@@ -23,9 +23,7 @@
     "url": "https://github.com/binocarlos/cli-streams/issues"
   },
   "homepage": "https://github.com/binocarlos/cli-streams",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "tape": "^2.13.3",
     "minimist": "^0.2.0",
